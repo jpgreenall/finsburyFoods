@@ -1,0 +1,48 @@
+*.py[cod]
+
+# C extensions
+*.*~
+*.so
+*.o
+# Packages
+*.egg
+*.egg-info
+*.swp
+dist
+build
+eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+lib
+lib64
+models
+doc/html
+doc/latex
+html
+latex
+
+# Eclipse stuff
+.cproject
+.settings
+core
+
+# Data
+*.json
+
+
+# Installer logs
+pip-log.txt
+
+# Unit test / coverage reports
+.coverage
+.tox
+nosetests.xml
+
+# Mr Developer
+.mr.developer.cfg
+.project
+.pydevproject
