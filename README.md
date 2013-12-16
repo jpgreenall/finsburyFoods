@@ -13,8 +13,8 @@ I use stdnum for validation of ean numbers. This was not a module that I had use
 I used dateutil for parsing of dates from the input in order to add the option to ignore transactions outside of a date range. I have commonly used this module in the past
 and seems by many to be considered part of the core python stack.
 
-[stdnum](https://pypi.python.org/pypi/python-dateutil "stdnum available here")
-[stdnum](https://pypi.python.org/pypi/python-stdnum/ "stdnum available here")
+[download dateutil here](https://pypi.python.org/pypi/python-dateutil "dateutil available here")
+[download stdnum here](https://pypi.python.org/pypi/python-stdnum/ "stdnum available here")
 
 
 Unit Tests:

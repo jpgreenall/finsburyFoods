@@ -1,0 +1,18 @@
+<stocklist>
+  <line ean="0746817152012">
+    <brand>V05</brand>
+    <name>hair gel - extra strong</name>
+    <quantity>150ml</quantity>
+    <price type="standard-sellthrough" currency="GBP">6.99</price>
+    <price type="wholesale" currency="GBP">4.30</price>
+    <batchsize>24</batchsize>
+  </line>
+  <line ean="8014215020045">
+    <brand>Alisea</brand>
+    <name>Naturale Italian mineral water</name>
+    <quantity>50cl</quantity>
+    <price type="standard-sellthrough" currency="GBP">2.10</price>
+    <price type="wholesale" currency="GBP">1.40</price>
+    <batchsize>20</batchsize>
+  </line>
+</stocklist>
