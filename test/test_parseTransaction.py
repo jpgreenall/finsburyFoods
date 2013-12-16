@@ -44,14 +44,17 @@ class FinsburyInputTester(unittest.TestCase):
         self.assertDictEqual(finsIn.parseTransactionCsv(TEST_TRANSACTION_FILE,fromDate=fromD,toDate=toD),{EAN1:-3})
         
     def test_parseStockErrorOnCurrencyType(self):
+        #non-GBP currency
         self.assertRaises(finsIn.InvalidCurrency,finsIn.parseWestBun,TEST_STOCK_FILE_EUR)
         return
 
     def test_parseStockErrorOnCurrency(self):
+        #currency value not parsable
         self.assertRaises(finsIn.InvalidCurrency,finsIn.parseWestBun,TEST_STOCK_FILE_CUR)
         return
     
     def test_parseStockErrorOnBatchsize(self):
+        #currency batchSize not parsable
         self.assertRaises(ValueError,finsIn.parseWestBun,TEST_STOCK_FILE_BAT)
         return       
     

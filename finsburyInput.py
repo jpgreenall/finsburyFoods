@@ -18,9 +18,16 @@ class InvalidCurrency(Exception):
 
 def parseTransactionCsv(fname,fromDate=None,toDate=None,warn=False):
     '''
-    @param[in] fname string, path to input file
+    Parse a transaction csv, of format:
+    transDate,transId,EAN,nSold  eg:
+    2011-10-25T13:41:26Z,3432,0746817152012,4
     
-    @return nSold - dictionary with ean as key, transaction count as value
+    @param[in] fname string, path to input file
+    @param[in] fromDate if not None, only take transactions on/ beyond this datetime object
+    @param[in] toDate if not None, only take transactions up to this datetime object
+    @param[in] warn boolean if True, print warnings about invalid EAN numbers
+    
+    @return nSold - dictionary with EAN as key, transaction count as value
     @raises IOError/ValueError if file missing/corrupted
     '''
     if not os.path.exists(fname):
@@ -28,11 +35,13 @@ def parseTransactionCsv(fname,fromDate=None,toDate=None,warn=False):
     transCount = defaultdict(int)
     with open(fname,'r') as infile:
         while(True):
+            line = infile.readline()
+            if not line:
+                break
             try:
-                line = infile.readline()
                 transDate,transId,ean,n = line.split(',')
             except ValueError: # hit end of file
-                break            
+                raise ValueError('invalid line: \n{}'.format(line))           
             #first check ean valid
             try:
                 ean = stdnum.ean.validate(ean)
@@ -56,6 +65,7 @@ def parseWestBun(fname,transactionDict=defaultdict(int),warn=False):
     '''
     @param[in] fname string, path to input file
     @param[in] transactionDict defaultdict with ean as key, nSold as val
+    @param[in] warn boolean if True, print warnings about invalid EAN numbers
     
     @return stockDict dictionary with ean as key, StockInfo object as val
     @raises IOError/ValueError/InvalidCurrency if file missing/corrupted

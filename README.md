@@ -5,7 +5,7 @@ Finsbury Foods Stock Summary Tools
 
 Installation:
 ==============
-The code was built and tested on linux. The instructions supplied here are for linux, however it should
+The code was built and tested on linux, using Python 2.7. The instructions supplied here are for linux, however it should
 be straightforward to get the code working on Windows.
 There is nothing that needs compiling in this project, however there are the following external dependencies:
 
@@ -30,7 +30,7 @@ Alternatively, the tests are located in the `test` folder and can be run directl
 Main Program:
 =============
 
-Run the main program as follows:
+Run the main program from within the project folder as follows:
 
 
     ./finsburySummary.py <stockFilename> <transactionFilename>
@@ -52,5 +52,5 @@ In general, I have used list comprehensions and built-ins for any iterative oper
 
 If you were to run the file on very large XML file (in order of GBs), there may be memory issues caused by the minidom module. Most XML libraries that I have experience of would have similar problems since they want parse the whole structure into memory. In this case, something custom could be done to parse the XML just like a text file line by line but it would be slightly messier and require more coding time. More likely, you would probably want to consider something other than XML for transmitting the data if it was of this magnitude.
 
-One piece of additional functionality that I thought would be useful and added to the parseTransactionsCsv function was to enable searching within a date range. I tested this but did not expose it to the command line.
+One piece of additional functionality that I thought would be useful and added to the parseTransactionsCsv function was to enable searching within a date range. I tested this on that function but did not expose it to the command line.
 
