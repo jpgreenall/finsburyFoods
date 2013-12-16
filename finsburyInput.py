@@ -12,6 +12,11 @@ from xml.dom import minidom
 from dateutil import parser
 import stdnum.ean
 
+class InvalidCurrency(Exception):
+    '''
+    exception used to indicate incorrect currency type in input
+    '''
+
 def parseTransactionCsv(fname,fromDate=None,toDate=None,warn=False):
     '''
     @param[in] fname string, path to input file
@@ -73,14 +78,20 @@ def parseWestBun(fname,transactionDict=defaultdict(int),warn=False):
             types = [str,str,str,int]
             for f,t in zip(stdFields,types):
                 n = s.getElementsByTagName(f)[0]
-                thisObj[f] = t(n.childNodes[0].data)
+                try:
+                    thisObj[f] = t(n.childNodes[0].data)
+                except ValueError,e:
+                    raise ValueError('Invalid value for {} of product with ean: {}. Should be of type: {}'.format(f,ean,type))
                 
             
             #now handle prices slightly differently
             for price in s.getElementsByTagName('price'):
                 if not price.getAttribute('currency') == 'GBP':
-                    raise ValueError('all currencies must be in GBP')
-                pence = int(price.childNodes[0].data.replace('.',''))
+                    raise InvalidCurrency('all currencies must be in GBP')
+                try:
+                    pence = int(price.childNodes[0].data.replace('.',''))
+                except ValueError:
+                    raise InvalidCurrency('Invalid currency value for product with ean: {}'.format(ean))
                 priceType = price.getAttribute('type')
                 thisObj[structs.StockInfo.priceFieldname[priceType]] = pence
             
