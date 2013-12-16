@@ -12,13 +12,17 @@ There is nothing that needs compiling in this project, however there are the fol
 External Dependencies:
 =====================
 I use stdnum for validation of ean numbers. This was not a module that I had used before but seems to be very widely-used and is public license. 
-I used dateutil for parsing of dates from the input in order to add the option to ignore transactions outside of a date range. I have commonly used this module in the past
-and seems by many to be considered part of the core python stack.
+I used dateutil for parsing of dates from the input in order to add the option to ignore transactions outside of a date range. I have commonly used this module in the past.
+Finally, I use numpy briefly in one of the unittests. If portability was an issue, then this dependency could be removed quite easily but I consider it to be part of the core python stack therefore include it without giving it any real thought.
 
 [download dateutil here](https://pypi.python.org/pypi/python-dateutil "dateutil available here")
 
 
 [download stdnum here](https://pypi.python.org/pypi/python-stdnum/ "stdnum available here")
+
+
+[download numpy here](https://pypi.python.org/pypi/numpy "stdnum available here")
+
 
 
 Unit Tests:

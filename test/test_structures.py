@@ -11,6 +11,7 @@ baseFolder = os.path.split(testFolder)[0]
 sys.path.append(baseFolder)
 import finsburyStructures as structs
 import unittest
+import numpy
 
 class FinsburyStructTester(unittest.TestCase):
     @classmethod
