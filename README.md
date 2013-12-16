@@ -21,7 +21,7 @@ Finally, I use numpy briefly in one of the unittests. If portability was an issu
 [download stdnum here](https://pypi.python.org/pypi/python-stdnum/ "stdnum available here")
 
 
-[download numpy here](https://pypi.python.org/pypi/numpy "stdnum available here")
+[download numpy here](https://pypi.python.org/pypi/numpy "numpy available here")
 
 
 
