@@ -20,12 +20,16 @@ class StockInfo(object):
         return
     
     def __eq__(self, other):
+        '''
+        overloading equality operator for object with __slots__
+        '''
         if isinstance(other, self.__class__):
-            same = True
             for f in self.__slots__:
-                if not getattr(self,f) == getattr(other,f):
-                    same = False
-            return same
+                if not (hasattr(self,f) == hasattr(self,f)):
+                    return False
+                elif hasattr(self,f) and not getattr(self,f) == getattr(other,f):
+                    return False
+            return True
         else:
             return False
     
@@ -42,6 +46,10 @@ class StockInfoList:
         self.n = len(self.data)
         
     def getAggregatedBrandQuantities(self):
+        '''
+        aggregate data by brand, cache result to self
+        @return aggregated dict with brand as key, count as val
+        '''
         if not hasattr(self,'aggregated'):
             self.aggregated = defaultdict(int)
             for d in self.data:
@@ -50,33 +58,67 @@ class StockInfoList:
         return self.aggregated
     
     def getTopAggregatedBrands(self,N):
+        '''
+        get the top brands in terms of quantity sold by aggregating then sorting
+        @param[in] N max number of results to return        
+        @return topList list of the top brands in form [(brand, quantity),..]
+        '''
         blist = [(b,v) for b,v in self.getAggregatedBrandQuantities().iteritems()]
         top = sorted(blist,key=lambda x:x[1],reverse=True)
         return top[:min(len(self.aggregated),N)]
     
     def getBottomAggregatedBrands(self,N):
+        '''
+        get the bottom brands in terms of quantity sold by aggregating then sorting
+        @param[in] N max number of results to return        
+        @return bottomList list of the top brands in form [(brand, quantity),..]
+        '''
         blist = [(b,v) for b,v in self.getAggregatedBrandQuantities().iteritems()]
-        top = sorted(blist,key=lambda x:x[1],reverse=False)
-        return top[:min(len(self.aggregated),N)]    
+        bottom = sorted(blist,key=lambda x:x[1],reverse=False)
+        return bottom[:min(len(self.aggregated),N)]    
     
     def getTotalProfit(self):
+        '''
+        get sum of profits over all items     
+        @return totalProfit int in pence
+        '''
         profits = [x.profit for x in self.data]
         return sum(profits)
         
     def getTopNProfits(self,N):
+        '''
+        get ordered list of the best N products by profit
+        @param[in] N max number of results to return        
+        @return topList list of the top StockInfo objects
+        '''        
         topN = sorted(self.data,key=lambda x:x.profit,reverse=True)
         return topN[:min(self.n,N)]
     
     def getBottomNProfits(self,N):
+        '''
+        get ordered list of the worst N products by profit
+        @param[in] N max number of results to return        
+        @return topList list of the top StockInfo objects
+        '''        
         topN = sorted(self.data,key=lambda x:x.profit)
         return topN[:min(self.n,N)]
     
-    def getTopNProfits(self,N):
-            topN = sorted(self.data,key=lambda x:x.profit,reverse=True)
-            return topN[:min(self.n,N)]
+    def getTopNQuantities(self,N):
+        '''
+        get ordered list of the best N products by quantity
+        @param[in] N max number of results to return        
+        @return topList list of the top StockInfo objects
+        '''        
+        topN = sorted(self.data,key=lambda x:x.nSold,reverse=True)
+        return topN[:min(self.n,N)]
         
-    def getBottomNProfits(self,N):
-        topN = sorted(self.data,key=lambda x:x.profit)
+    def getBottomNQuantities(self,N):
+        '''
+        get ordered list of the worst N products by quantity
+        @param[in] N max number of results to return        
+        @return topList list of the top StockInfo objects
+        '''        
+        topN = sorted(self.data,key=lambda x:x.nSold)
         return topN[:min(self.n,N)]       
         
         

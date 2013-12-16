@@ -6,10 +6,11 @@ This file contains unittests for Finsbury Foods
 '''
 import sys
 import os
-sys.path.append(os.path.split(os.getcwd())[0])
+testFolder = os.path.split(os.path.realpath(__file__))[0]
+baseFolder = os.path.split(testFolder)[0]
+sys.path.append(baseFolder)
 import finsburyStructures as structs
 import unittest
-import numpy
 
 class FinsburyStructTester(unittest.TestCase):
     @classmethod
